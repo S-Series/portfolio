@@ -4,11 +4,37 @@ import { portfolioProjects } from '../datas/portfolio'
 
 const projects = portfolioProjects
 
-const skills = ['Vue', 'TypeScript', 'Responsive UI', 'Interaction', 'Design Systems', 'Git']
+const skills = [
+  {
+    name: 'Vue',
+    evidence: 'This portfolio is built as a Vue app with routed views and component sections.',
+  },
+  {
+    name: 'TypeScript',
+    evidence: 'Project data and setup scripts use typed structures for safer page content.',
+  },
+  {
+    name: 'Responsive UI',
+    evidence: 'Layouts switch across desktop and mobile breakpoints without changing content.',
+  },
+  {
+    name: 'Interaction',
+    evidence: 'The page includes reveal states, pointer particles, tilt panels, and hover feedback.',
+  },
+  {
+    name: 'Design Systems',
+    evidence: 'Shared chips, panels, route cards, and section patterns keep screens consistent.',
+  },
+  {
+    name: 'Git',
+    evidence: 'Project links and repository workflow are surfaced as part of the portfolio content.',
+  },
+]
 
 const routes = [
   { title: 'Projects', path: '/projects' },
   { title: 'Skills', path: '/skills' },
+  { title: 'Playground', path: '/playground' },
   { title: 'About', path: '/about' },
   { title: 'Contact', path: '/contact' },
 ]
@@ -89,8 +115,8 @@ onUnmounted(() => {
           <p class="eyebrow">Portfolio Interface 2026</p>
           <h1 id="hero-title">
             <span>Hello, I'm SSeries.</span>
-            <span class="hero-intro-line">I'm a</span>
             <span class="hero-role-line">
+              <span class="hero-intro-line">I'm a</span>
               <span class="typing-word">{{ typedWord }}</span>
               <span class="typing-cursor" aria-hidden="true"></span>
               <span class="developer-word">Developer</span>
@@ -126,7 +152,7 @@ onUnmounted(() => {
             <div class="machine-rail rail-left"></div>
           </div>
           <div class="panel-skills" aria-label="Skills">
-            <span v-for="skill in skills" :key="skill">{{ skill }}</span>
+            <span v-for="skill in skills" :key="skill.name">{{ skill.name }}</span>
           </div>
         </aside>
       </div>
@@ -178,7 +204,10 @@ onUnmounted(() => {
         </div>
 
         <div class="skill-grid reveal">
-          <span v-for="skill in skills" :key="skill">{{ skill }}</span>
+          <article v-for="skill in skills" :key="skill.name" class="skill-card">
+            <strong>{{ skill.name }}</strong>
+            <p>{{ skill.evidence }}</p>
+          </article>
         </div>
       </div>
     </section>
@@ -327,10 +356,11 @@ h1 {
 }
 
 .hero-intro-line {
-  display: block;
-  margin-top: 0.12em;
+  display: inline;
+  margin-right: 0.22em;
   font-size: 0.62em;
   color: rgba(238, 247, 255, 0.86);
+  vertical-align: 0.07em;
 }
 
 .typing-word {
@@ -628,7 +658,6 @@ h3 {
 }
 
 .panel-skills span,
-.skill-grid span,
 .project-links a {
   border: 1px solid rgba(117, 240, 255, 0.2);
   border-radius: 999px;
@@ -830,16 +859,35 @@ h3 {
 }
 
 .skill-grid {
-  min-height: 220px;
-  align-content: center;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
-.skill-grid span {
-  padding: 13px 16px;
-  background: rgba(117, 240, 255, 0.09);
+.skill-card {
+  min-height: 128px;
+  border: 1px solid rgba(117, 240, 255, 0.2);
+  border-radius: 8px;
+  padding: 18px;
+  background:
+    linear-gradient(135deg, rgba(117, 240, 255, 0.08), rgba(255, 91, 215, 0.045)),
+    rgba(5, 7, 18, 0.46);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.skill-card strong {
+  display: block;
+  margin-bottom: 10px;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 950;
+}
+
+.skill-card p {
+  margin-bottom: 0;
+  color: rgba(238, 247, 255, 0.64);
+  font-size: 0.92rem;
+  line-height: 1.58;
 }
 
 .social-grid {
@@ -1030,8 +1078,7 @@ h3 {
   }
 
   .skill-grid {
-    justify-content: center;
-    min-height: 180px;
+    grid-template-columns: 1fr;
   }
 }
 
