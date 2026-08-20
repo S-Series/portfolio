@@ -2,27 +2,35 @@
   <main class="contact-view">
     <section class="contact-hero" aria-labelledby="contact-title">
       <div class="contact-copy">
-        <p class="eyebrow">Open Channel</p>
+        <p class="eyebrow">Get in touch</p>
         <h1 id="contact-title">Contact</h1>
         <p>
-          Portfolio work, small interface builds, and Vue-based experiments are good fits. Send the
+          Portfolio work, interface builds, and Vue-based experiments are good fits. Send the
           context, deadline, and the shape of the thing you want to make.
         </p>
       </div>
 
-      <aside class="signal-panel" aria-label="Contact details">
-        <div>
-          <span>Primary</span>
-          <a href="https://github.com/S-Series" target="_blank" rel="noopener">github.com/S-Series</a>
-        </div>
-        <div>
-          <span>GitHub</span>
-          <a href="https://github.com/S-Series" target="_blank" rel="noopener">S-Series</a>
-        </div>
-        <div>
-          <span>Response</span>
-          <strong>Usually within 1-2 days</strong>
-        </div>
+      <aside class="contact-details" aria-label="Contact details">
+        <dl>
+          <div>
+            <dt>Primary</dt>
+            <dd>
+              <a href="https://github.com/S-Series" target="_blank" rel="noopener">
+                github.com/S-Series
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt>GitHub</dt>
+            <dd>
+              <a href="https://github.com/S-Series" target="_blank" rel="noopener">S-Series</a>
+            </dd>
+          </div>
+          <div>
+            <dt>Response</dt>
+            <dd>Usually within 1-2 days</dd>
+          </div>
+        </dl>
       </aside>
     </section>
 
@@ -30,19 +38,21 @@
       <article>
         <span>01</span>
         <h2>Project Inquiry</h2>
-        <p>Share the goal, audience, core screens, and any existing design or repository context.</p>
+        <p>Share the goal, audience, core screens, and any existing repository context.</p>
       </article>
 
       <article>
         <span>02</span>
         <h2>Collaboration</h2>
-        <p>Useful for frontend polish, Vue page structure, interactive details, and portfolio systems.</p>
+        <p>Useful for frontend work, Vue page structure, and portfolio systems.</p>
       </article>
 
       <article>
         <span>03</span>
         <h2>Quick Signal</h2>
-        <p>A short note is enough when the idea is early. The first reply can help shape the next step.</p>
+        <p>
+          A short note is enough when the idea is early. The first reply can shape the next step.
+        </p>
       </article>
     </section>
   </main>
@@ -52,142 +62,170 @@
 .contact-view {
   width: min(1080px, calc(100% - 36px));
   margin: 0 auto;
-  padding: clamp(44px, 6vw, 78px) 0 120px;
+  padding: clamp(48px, 7vw, 88px) 0 96px;
 }
 
 .contact-hero {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.56fr);
-  align-items: stretch;
-  gap: clamp(20px, 4vw, 42px);
-  margin-bottom: clamp(34px, 6vw, 64px);
+  grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.6fr);
+  gap: clamp(32px, 6vw, 72px);
+  margin-bottom: clamp(52px, 8vw, 88px);
 }
 
 .contact-copy,
-.signal-panel,
+.contact-details,
 .contact-grid article {
-  border: 1px solid rgba(117, 240, 255, 0.2);
-  border-radius: 8px;
+  position: relative;
+  border-top: 2px dashed var(--pencil-line);
+  padding-top: 28px;
+}
+
+.contact-copy::after {
+  position: absolute;
+  top: clamp(118px, 15vw, 170px);
+  left: -6px;
+  width: min(420px, 82%);
+  height: 18px;
+  background: url('/notebook/pencil-underline.svg') center / 100% 100% no-repeat;
+  content: '';
+  opacity: 0.58;
+  transform: rotate(-1deg);
+}
+
+.contact-details {
+  padding: 36px 28px 28px;
+  border: 1.5px solid var(--pencil-line);
   background:
-    linear-gradient(135deg, rgba(3, 37, 58, 0.72), rgba(9, 17, 36, 0.5)),
-    rgba(255, 255, 255, 0.045);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    url('/notebook/paper-grain.svg') repeat,
+    var(--paper-light);
+  box-shadow: 6px 8px 0 rgb(77 67 52 / 9%);
+  clip-path: polygon(1% 1%, 98% 0, 100% 95%, 96% 100%, 2% 98%, 0 8%);
+  transform: rotate(0.8deg);
 }
 
-.contact-copy {
-  padding: clamp(26px, 5vw, 52px);
+.contact-details::before,
+.contact-grid article::before {
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  width: 104px;
+  height: 35px;
+  background: url('/notebook/tape.svg') center / 100% 100% no-repeat;
+  content: '';
+  opacity: 0.88;
+  transform: translateX(-50%) rotate(-2deg);
 }
 
-.eyebrow {
-  margin: 0 0 12px;
-  color: #75f0ff;
-  font-size: 0.78rem;
-  font-weight: 950;
-  letter-spacing: 0;
+.eyebrow,
+dt,
+.contact-grid span {
+  margin: 0 0 10px;
+  color: var(--ink-soft);
+  font-size: 1.02rem;
   text-transform: uppercase;
 }
 
 h1,
 h2,
-p {
+p,
+dl,
+dd {
   margin-top: 0;
 }
 
 h1 {
   margin-bottom: 18px;
-  color: #ffffff;
-  font-size: clamp(3rem, 7vw, 6.4rem);
-  line-height: 0.98;
+  font-size: clamp(4rem, 10vw, 7.8rem);
+  line-height: 0.78;
+  transform: rotate(-1deg);
 }
 
-.contact-copy p {
-  max-width: 620px;
+h2 {
+  margin-bottom: 12px;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  line-height: 0.94;
+}
+
+p,
+dd {
+  line-height: 1.7;
+}
+
+.contact-details dl {
   margin-bottom: 0;
-  color: rgba(238, 247, 255, 0.7);
-  line-height: 1.75;
 }
 
-.signal-panel {
-  display: grid;
-  align-content: center;
-  gap: 14px;
-  padding: clamp(22px, 4vw, 34px);
-  background:
-    linear-gradient(135deg, rgba(36, 18, 61, 0.48), rgba(0, 64, 76, 0.38)),
-    rgba(255, 255, 255, 0.045);
+.contact-details dl > div {
+  padding-bottom: 18px;
+  border-bottom: 1px dashed var(--pencil-line);
 }
 
-.signal-panel div {
-  display: grid;
-  gap: 8px;
-  border-bottom: 1px solid rgba(238, 247, 255, 0.12);
-  padding-bottom: 14px;
+.contact-details dl > div + div {
+  padding-top: 18px;
 }
 
-.signal-panel div:last-child {
-  border-bottom: 0;
-  padding-bottom: 0;
-}
-
-.signal-panel span,
-.contact-grid span {
-  color: #ff8ee4;
-  font-size: 0.78rem;
-  font-weight: 950;
-  text-transform: uppercase;
-}
-
-.signal-panel a,
-.signal-panel strong {
-  color: #ffffff;
-  font-size: 1.08rem;
-  font-weight: 900;
+.contact-details dd {
+  margin-bottom: 0;
+  margin-left: 0;
   overflow-wrap: anywhere;
-}
-
-.signal-panel a:hover {
-  color: #75f0ff;
 }
 
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
+  gap: 24px;
 }
 
 .contact-grid article {
   min-height: 220px;
-  padding: clamp(22px, 3vw, 30px);
+  padding: 34px 24px 26px;
+  border: 1.5px solid var(--pencil-line);
+  background:
+    url('/notebook/paper-grain.svg') repeat,
+    rgb(255 250 240 / 88%);
+  box-shadow: 5px 7px 0 rgb(77 67 52 / 8%);
+  clip-path: polygon(1% 1%, 98% 0, 100% 95%, 96% 100%, 2% 98%, 0 8%);
+}
+
+.contact-grid article:nth-child(1) {
+  transform: rotate(-0.7deg);
+}
+
+.contact-grid article:nth-child(2) {
+  transform: translateY(8px) rotate(0.6deg);
+}
+
+.contact-grid article:nth-child(3) {
+  transform: rotate(-0.4deg);
+}
+
+.contact-grid article:nth-child(even)::before {
+  left: 30%;
+  transform: translateX(-50%) rotate(3deg);
 }
 
 .contact-grid span {
-  display: inline-flex;
-  margin-bottom: 20px;
-}
-
-h2 {
-  margin-bottom: 14px;
-  color: #ffffff;
-  font-size: clamp(1.6rem, 3vw, 2.3rem);
-  line-height: 1.04;
+  display: block;
 }
 
 .contact-grid p {
   margin-bottom: 0;
-  color: rgba(238, 247, 255, 0.66);
-  line-height: 1.7;
 }
 
-@media (max-width: 820px) {
+@media (max-width: 760px) {
   .contact-hero,
   .contact-grid {
     grid-template-columns: 1fr;
   }
-}
 
-@media (max-width: 560px) {
-  .contact-view {
-    width: min(100% - 28px, 1080px);
+  .contact-copy::after {
+    top: clamp(112px, 32vw, 148px);
+  }
+
+  .contact-details,
+  .contact-grid article,
+  .contact-grid article:nth-child(2) {
+    transform: none;
   }
 }
 </style>

@@ -7,7 +7,7 @@ const skillGroups = [
   },
   {
     title: 'Interface Craft',
-    note: 'The layer that makes a portfolio feel polished, usable, and alive.',
+    note: 'The layer used to make an interface usable and consistent.',
     items: ['Responsive UI', 'Animation', 'Accessibility', 'Design Systems', 'Interaction'],
   },
   {
@@ -28,14 +28,11 @@ const focusItems = [
 
 <template>
   <main class="skills-view">
-    <section class="skills-hero" aria-labelledby="skills-title">
-      <p class="eyebrow">Capability Matrix</p>
+    <header class="page-intro" aria-labelledby="skills-title">
+      <p class="eyebrow">Capabilities</p>
       <h1 id="skills-title">Skills</h1>
-      <p>
-        A developer skills page usually groups core languages, frameworks, UI strengths, workflow,
-        and the way the developer thinks through product problems.
-      </p>
-    </section>
+      <p>Core languages, frameworks, interface strengths, and build workflow.</p>
+    </header>
 
     <section class="skill-groups" aria-label="Skill groups">
       <article v-for="group in skillGroups" :key="group.title" class="skill-panel">
@@ -45,16 +42,16 @@ const focusItems = [
           <p>{{ group.note }}</p>
         </div>
 
-        <div class="skill-chip-grid">
-          <span v-for="item in group.items" :key="item">{{ item }}</span>
-        </div>
+        <ul>
+          <li v-for="item in group.items" :key="item">{{ item }}</li>
+        </ul>
       </article>
     </section>
 
     <section class="focus-section" aria-labelledby="focus-title">
       <div>
         <p class="eyebrow">Working Style</p>
-        <h2 id="focus-title">What this page can grow into</h2>
+        <h2 id="focus-title">Current focus</h2>
       </div>
 
       <ul>
@@ -68,27 +65,33 @@ const focusItems = [
 .skills-view {
   width: min(1080px, calc(100% - 36px));
   margin: 0 auto;
-  padding: clamp(44px, 6vw, 78px) 0 120px;
+  padding: clamp(48px, 7vw, 88px) 0 96px;
 }
 
-.skills-hero {
-  max-width: 760px;
-  margin: 0 auto clamp(42px, 6vw, 72px);
-  text-align: center;
+.page-intro {
+  position: relative;
+  max-width: 720px;
+  margin-bottom: clamp(44px, 7vw, 72px);
+}
+
+.page-intro::after {
+  position: absolute;
+  bottom: -22px;
+  left: -6px;
+  width: min(420px, 78%);
+  height: 18px;
+  background: url('/notebook/pencil-underline.svg') center / 100% 100% no-repeat;
+  content: '';
+  opacity: 0.62;
+  transform: rotate(-1deg);
 }
 
 .eyebrow,
 .panel-kicker {
-  margin: 0 0 12px;
-  color: #75f0ff;
-  font-size: 0.78rem;
-  font-weight: 950;
-  letter-spacing: 0;
+  margin: 0 0 10px;
+  color: var(--ink-soft);
+  font-size: 1.02rem;
   text-transform: uppercase;
-}
-
-.panel-kicker {
-  color: rgba(117, 240, 255, 0.78);
 }
 
 h1,
@@ -99,108 +102,120 @@ p {
 
 h1 {
   margin-bottom: 18px;
-  color: #ffffff;
-  font-size: clamp(2.8rem, 6.2vw, 5.9rem);
-  line-height: 0.98;
+  font-size: clamp(4rem, 10vw, 7.8rem);
+  line-height: 0.78;
+  transform: rotate(-1deg);
 }
 
 h2 {
-  margin-bottom: 14px;
-  color: #ffffff;
-  font-size: clamp(1.9rem, 3vw, 3.1rem);
-  line-height: 1.04;
+  margin-bottom: 12px;
+  font-size: clamp(2.1rem, 4vw, 3.4rem);
+  line-height: 0.9;
 }
 
-.skills-hero p,
-.skill-panel p,
-.focus-section li {
-  color: rgba(238, 247, 255, 0.68);
+p,
+li {
   line-height: 1.7;
-}
-
-.skills-hero p {
-  max-width: 660px;
-  margin: 0 auto;
 }
 
 .skill-groups {
   display: grid;
-  gap: 16px;
+  gap: 34px;
+  padding-top: 16px;
 }
 
 .skill-panel {
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 0.72fr) minmax(280px, 0.78fr);
-  align-items: center;
-  gap: clamp(24px, 5vw, 64px);
-  border: 1px solid rgba(117, 240, 255, 0.2);
-  border-radius: 8px;
-  padding: clamp(22px, 4vw, 38px);
+  grid-template-columns: minmax(0, 0.8fr) minmax(280px, 1fr);
+  align-items: start;
+  gap: clamp(28px, 6vw, 72px);
+  padding: clamp(30px, 5vw, 48px);
+  border: 1.5px solid var(--pencil-line);
   background:
-    linear-gradient(135deg, rgba(3, 37, 58, 0.72), rgba(9, 17, 36, 0.5)),
-    rgba(255, 255, 255, 0.045);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    url('/notebook/paper-grain.svg') repeat,
+    var(--paper-light);
+  box-shadow: 6px 8px 0 rgb(78 68 54 / 9%);
+  clip-path: polygon(1% 1%, 98% 0, 100% 95%, 97% 100%, 2% 98%, 0 8%);
+  transform: rotate(-0.35deg);
+  width: 94%;
 }
 
 .skill-panel:nth-child(even) {
-  background:
-    linear-gradient(135deg, rgba(36, 18, 61, 0.42), rgba(0, 64, 76, 0.36)),
-    rgba(255, 255, 255, 0.045);
+  margin-left: auto;
+  transform: rotate(0.45deg);
 }
 
-.skill-chip-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
+.skill-panel:nth-child(3) {
+  margin-left: 3%;
 }
 
-.skill-chip-grid span,
-.focus-section li {
-  border: 1px solid rgba(117, 240, 255, 0.22);
-  border-radius: 999px;
-  background: rgba(5, 7, 18, 0.46);
-  color: rgba(238, 247, 255, 0.86);
-  font-weight: 900;
+.skill-panel::before {
+  position: absolute;
+  top: -6px;
+  left: 14%;
+  width: 102px;
+  height: 35px;
+  background: url('/notebook/tape.svg') center / 100% 100% no-repeat;
+  content: '';
+  opacity: 0.84;
+  transform: rotate(-3deg);
 }
 
-.skill-chip-grid span {
-  padding: 11px 14px;
+.skill-panel:nth-child(even)::before {
+  right: 14%;
+  left: auto;
+  transform: rotate(3deg);
 }
 
-.focus-section {
-  display: grid;
-  grid-template-columns: minmax(240px, 0.72fr) 1fr;
-  align-items: center;
-  gap: clamp(28px, 5vw, 60px);
-  margin-top: clamp(34px, 6vw, 72px);
-  border-top: 1px solid rgba(238, 247, 255, 0.12);
-  padding-top: clamp(34px, 6vw, 62px);
-}
-
+.skill-panel ul,
 .focus-section ul {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 10px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+.skill-panel li,
 .focus-section li {
-  padding: 12px 15px;
+  border: 1.5px solid var(--pencil-line);
+  border-radius: 49% 51% 47% 53% / 53% 46% 54% 47%;
+  padding: 8px 11px;
+  background: rgb(247 241 227 / 54%);
+  font-family: 'Notebook Handwriting', cursive;
+  font-size: 1.18rem;
+  transform: rotate(-0.8deg);
 }
 
-@media (max-width: 760px) {
+.skill-panel li:nth-child(even),
+.focus-section li:nth-child(even) {
+  transform: rotate(0.9deg);
+}
+
+.focus-section {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(240px, 0.7fr) 1fr;
+  align-items: start;
+  gap: clamp(28px, 6vw, 72px);
+  margin-top: clamp(48px, 7vw, 80px);
+  padding-top: 40px;
+  border-top: 2px dashed var(--pencil-line);
+}
+
+@media (max-width: 720px) {
   .skill-panel,
   .focus-section {
     grid-template-columns: 1fr;
   }
 
   .skill-panel,
-  .focus-section {
-    text-align: center;
+  .skill-panel:nth-child(even) {
+    width: 100%;
+    margin-left: 0;
+    transform: none;
   }
 }
 </style>
